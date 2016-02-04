@@ -36,7 +36,7 @@ module.exports = (grunt) ->
   # Options
   installDir = grunt.option('install-dir')
   buildDir = grunt.option('build-dir')
-  buildDir ?= path.join(os.tmpdir(), 'atom-build')
+  buildDir ?= 'out'
   buildDir = path.resolve(buildDir)
 
   channel = grunt.option('channel')
@@ -121,6 +121,8 @@ module.exports = (grunt) ->
       ext: '.css'
 
   prebuildLessConfig =
+    options:
+      cachePath: path.join(homeDir, '.atom', 'compile-cache', 'prebuild-less', require('less-cache/package.json').version)
     src: [
       'static/**/*.less'
     ]
